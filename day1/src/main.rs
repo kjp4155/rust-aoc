@@ -2,17 +2,19 @@ use std::io;
 
 fn solve(v: &[i32], i: usize, j: usize, count: u32, target_sum: i32) -> i32 {
     if count == 0 {
-        return if target_sum == 0 {1} else {0}
+        if target_sum == 0 { 1 } else { 0 }
     }
-    for idx in i..j {
-        if v[idx] <= target_sum {
-            let partial_mul = solve(&v, idx + 1, j, count - 1, target_sum - v[idx]);
-            if partial_mul != 0 {
-                return v[idx] * partial_mul
+    else {
+        for idx in i..j {
+            if v[idx] <= target_sum {
+                let partial_mul = solve(&v, idx + 1, j, count - 1, target_sum - v[idx]);
+                if partial_mul != 0 {
+                    return v[idx] * partial_mul;
+                }
             }
         }
+        0
     }
-    return 0;
 }
 
 fn main() {
